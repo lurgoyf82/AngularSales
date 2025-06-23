@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { CartService, CartRequest, CartResponse } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart-form',
-  templateUrl: './cart-form.component.html',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './cart-form.html',
+  styleUrls: ['./cart-form.css']
 })
 export class CartFormComponent {
   itemsText = '';
