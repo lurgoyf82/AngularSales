@@ -1,48 +1,49 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-cart-form',
   template: `
-    <form [formGroup]="cartForm" (ngSubmit)="submitCart()">
-      <div formArrayName="items">
-        <div *ngFor="let item of items.controls; let i = index">
-          <input [formControlName]="i" placeholder="Enter item (e.g., '1 book at 12.49')" />
-          <button type="button" (click)="removeItem(i)">Remove</button>
-        </div>
-      </div>
-      <button type="button" (click)="addItem()">Add Item</button>
-      <button type="submit" [disabled]="cartForm.invalid">Submit</button>
+    <form (ngSubmit)="submit()">
+      <textarea
+        rows="6"
+        [(ngModel)]="itemsText"
+        name="items"
+        style="width: 100%;"
+      ></textarea>
+      <button type="submit">Submit</button>
     </form>
-  `
+
+    <div *ngIf="response">
+      <ul>
+        <li *ngFor="let item of response.items">{{ item }}</li>
+      </ul>
+      <p>Sales Taxes: {{ response.salesTaxes }}</p>
+      <p>Total: {{ response.total }}</p>
+    </div>
+  `,
+  styles: [
+    `form { margin-bottom: 1rem; }`
+  ]
 })
 export class CartFormComponent {
   @Output() cartSubmitted = new EventEmitter<any>();
-  cartForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private cartService: CartService) {
-    this.cartForm = this.fb.group({
-      items: this.fb.array([this.fb.control('')])
-    });
-  }
+  itemsText = '';
+  response: any;
 
-  get items() {
-    return this.cartForm.get('items') as FormArray;
-  }
+  constructor(private cartService: CartService) {}
 
-  addItem() {
-    this.items.push(this.fb.control(''));
-  }
+  submit() {
+    const items = this.itemsText
+      .split('\n')
+      .map(i => i.trim())
+      .filter(i => i);
 
-  removeItem(index: number) {
-    this.items.removeAt(index);
-  }
-
-  submitCart() {
-    const payload = { items: this.cartForm.value.items };
-    this.cartService.getCartResponse(payload).subscribe(response => {
-      this.cartSubmitted.emit(response);
+    const payload = { items };
+    this.cartService.getCartResponse(payload).subscribe(res => {
+      this.response = res;
+      this.cartSubmitted.emit(res);
     });
   }
 }
