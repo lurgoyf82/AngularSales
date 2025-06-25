@@ -8,5 +8,7 @@
 </div>
 <div *ngIf="response">
   <h3>Risposta</h3>
-  <pre>{{ response }}</pre>
+  <pre>{{ response | json }}</pre>
+  <p>Sales Taxes: {{ response.salesTaxes }}</p>
+  <p>Total: {{ response.total }}</p>
 </div>
