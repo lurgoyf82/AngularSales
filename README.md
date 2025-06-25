@@ -25,3 +25,28 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Backend API
+
+AngularSales expects a backend service exposing a `POST` endpoint at `/GetCartResponse`. By default the frontend sends requests to `https://localhost:5001` as defined in `src/environments/environment.ts`.
+
+Example request:
+
+```bash
+curl -X POST https://localhost:5001/GetCartResponse \
+  -H "Content-Type: application/json" \
+  -d '{ "items": ["1 book at 12.49", "1 music CD at 14.99", "1 chocolate bar at 0.85"] }'
+```
+
+Example response:
+
+```json
+{
+  "items": ["1 book at 12.49", "1 music CD at 14.99", "1 chocolate bar at 0.85"],
+  "salesTaxes": 1.50,
+  "total": 29.83
+}
+```
+
+If your backend runs on another URL or port, change the `apiUrl` value in `src/environments/environment.ts` (and `environment.prod.ts` if needed) to point to the correct location.
+
