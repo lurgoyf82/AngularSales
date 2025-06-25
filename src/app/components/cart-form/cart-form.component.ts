@@ -13,9 +13,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CartFormComponent {
   itemsControl = new FormControl('', { nonNullable: true });
-  response?: CartResponse;
+  response?: string;
   loading = false;
   error?: string;
+  errorDetail?: string;
 
   constructor(private cartService: CartService) {}
 
@@ -27,6 +28,7 @@ export class CartFormComponent {
       .filter((v) => v);
     this.loading = true;
     this.error = undefined;
+    this.errorDetail = undefined;
     this.response = undefined;
     this.cartService.getCartResponse(items).subscribe({
       next: (res) => {
