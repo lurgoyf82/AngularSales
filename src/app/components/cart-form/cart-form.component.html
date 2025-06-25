@@ -3,7 +3,9 @@
 </div>
 <button type="button" (click)="submit()">Invia</button>
 <div *ngIf="loading">Caricamento...</div>
-<div *ngIf="error" class="error">{{ error }}</div>
+<div *ngIf="error" class="error">
+  {{ error }}<span *ngIf="errorDetail"> - {{ errorDetail }}</span>
+</div>
 <div *ngIf="response">
   <h3>Risposta</h3>
   <pre>{{ response | json }}</pre>

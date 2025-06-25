@@ -15,6 +15,7 @@ export class CartFormComponent {
   response?: CartResponse;
   loading = false;
   error?: string;
+  errorDetail?: string;
 
   constructor(private cartService: CartService) {}
 
@@ -26,14 +27,16 @@ export class CartFormComponent {
       .filter((v) => v);
     this.loading = true;
     this.error = undefined;
+    this.errorDetail = undefined;
     this.response = undefined;
     this.cartService.getCartResponse(items).subscribe({
       next: (res) => {
         this.response = res;
         this.loading = false;
       },
-      error: () => {
+      error: (err) => {
         this.error = 'Errore nella richiesta';
+        this.errorDetail = err.message ?? `status: ${err.status}`;
         this.loading = false;
       }
     });
