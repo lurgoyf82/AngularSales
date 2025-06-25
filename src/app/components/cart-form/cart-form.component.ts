@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { CartService } from '../../services/cart.service';
+import { CartService, CartResponse } from '../../services/cart.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart-form',
@@ -34,9 +35,10 @@ export class CartFormComponent {
         this.response = res;
         this.loading = false;
       },
-      error: (err) => {
-        this.error = 'Errore nella richiesta';
-        this.errorDetail = err.message ?? `status: ${err.status}`;
+      error: (error: HttpErrorResponse) => {
+        console.error('Cart request failed', error.message || error.status);
+        this.error =
+          error.error?.message ?? 'Errore nella richiesta. Riprova più tardi.';
         this.loading = false;
       }
     });

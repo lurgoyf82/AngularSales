@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 export interface CartResponse {
@@ -13,12 +14,13 @@ export interface CartResponse {
 export class CartService {
   constructor(private http: HttpClient) {}
 
-  getCartResponse(items: string[]): Observable<string> {
-    const headers = new HttpHeaders({ Accept: 'text/plain' });
-    return this.http.post<string>(
-      `${environment.apiUrl}/GetCartResponse`,
-      { items },
-      { headers, responseType: 'text' as const }
-    );
+  getCartResponse(items: string[]): Observable<CartResponse> {
+    return this.http
+      .post<CartResponse>(`${environment.apiUrl}/GetCartResponse`, { items })
+      .pipe(
+        catchError((error: HttpErrorResponse) =>
+          throwError(() => error.error ?? error)
+        )
+      );
   }
 }
