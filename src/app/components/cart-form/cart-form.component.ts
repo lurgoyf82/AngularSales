@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { CartService, CartResponse } from '../../services/cart.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart-form',
@@ -12,9 +13,10 @@ import { CartService, CartResponse } from '../../services/cart.service';
 })
 export class CartFormComponent {
   itemsControl = new FormControl('', { nonNullable: true });
-  response?: CartResponse;
+  response?: string;
   loading = false;
   error?: string;
+  errorDetail?: string;
 
   constructor(private cartService: CartService) {}
 
@@ -26,14 +28,17 @@ export class CartFormComponent {
       .filter((v) => v);
     this.loading = true;
     this.error = undefined;
+    this.errorDetail = undefined;
     this.response = undefined;
     this.cartService.getCartResponse(items).subscribe({
       next: (res) => {
         this.response = res;
         this.loading = false;
       },
-      error: () => {
-        this.error = 'Errore nella richiesta';
+      error: (error: HttpErrorResponse) => {
+        console.error('Cart request failed', error.message || error.status);
+        this.error =
+          error.error?.message ?? 'Errore nella richiesta. Riprova più tardi.';
         this.loading = false;
       }
     });
