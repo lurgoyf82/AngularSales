@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { CartService, CartResponse } from '../../services/cart.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart-form',
@@ -12,7 +12,7 @@ import { CartService, CartResponse } from '../../services/cart.service';
 })
 export class CartFormComponent {
   itemsControl = new FormControl('', { nonNullable: true });
-  response?: CartResponse;
+  response?: string;
   loading = false;
   error?: string;
   errorDetail?: string;
