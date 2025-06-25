@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -16,7 +16,8 @@ export class CartService {
   getCartResponse(items: string[]): Observable<CartResponse> {
     return this.http.post<CartResponse>(
       `${environment.apiUrl}/GetCartResponse`,
-      { items }
+      { items },
+      { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }
     );
   }
 }
