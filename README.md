@@ -20,9 +20,8 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## API Response
 
-`CartService.getCartResponse` expects a plain text response from the backend.
-The service sends a POST request with the `Accept: text/plain` header and the
-API returns a simple string instead of JSON.
+`CartService.getCartResponse` receives a JSON object returned by the backend.
+The response includes `items`, `salesTaxes`, and `total` fields.
 
 ## Running end-to-end tests
 
