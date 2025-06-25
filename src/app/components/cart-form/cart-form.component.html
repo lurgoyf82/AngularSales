@@ -1,7 +1,7 @@
-<div>
-  <textarea [formControl]="itemsControl" rows="5" placeholder="Inserisci gli articoli, uno per riga"></textarea>
-</div>
-<button type="button" (click)="submit()">Invia</button>
+<mat-form-field appearance="fill">
+  <textarea matInput [formControl]="itemsControl" rows="5" placeholder="Inserisci gli articoli, uno per riga"></textarea>
+</mat-form-field>
+<button mat-raised-button type="button" (click)="submit()">Invia</button>
 <div *ngIf="loading">Caricamento...</div>
 <div *ngIf="error" class="error">
   {{ error }}<span *ngIf="errorDetail"> - {{ errorDetail }}</span>

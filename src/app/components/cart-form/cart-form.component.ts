@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { CartService, CartResponse } from '../../services/cart.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule],
   templateUrl: './cart-form.component.html',
   styleUrl: './cart-form.component.css'
 })
