@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://sales.raphp.net:5001'
+  apiUrl: 'https://sales.raphp.net:5001'
 };
