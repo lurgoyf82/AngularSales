@@ -58,3 +58,4 @@ jobs:
           username: deployer
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: sudo systemctl reload apache2
+          request_pty: true
