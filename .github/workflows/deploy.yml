@@ -37,17 +37,12 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: deployer
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "dist/angular-sales/browser/*"
+          source: "."
           target: "/var/www/html"
-
-#       - name: Reload Apache
-#         uses: appleboy/ssh-action@master
-#         with:
-#           host: ${{ secrets.SSH_HOST }}
-#           username: deployer
-#           key: ${{ secrets.SSH_PRIVATE_KEY }}
-#           script: |
-#             sudo systemctl reload apache2
+          strip_components: 3
+          overwrite: true
+          working-directory: dist/angular-sales/browser
+          
 
 
 
