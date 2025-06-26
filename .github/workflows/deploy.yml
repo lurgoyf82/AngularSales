@@ -37,10 +37,9 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: deployer
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "dist/angular-sales/browser/"
+          source: "dist/angular-sales/browser/*"
           target: "/var/www/html"
           strip_components: 3
-          
 
 
 
