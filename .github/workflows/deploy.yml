@@ -38,7 +38,7 @@ jobs:
           username: deployer
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "dist/angular-sales/browser/*"
-          target: "/var/www/angular.raphp.net"
+          target: "/var/www/html"
 
 #       - name: Reload Apache
 #         uses: appleboy/ssh-action@master
