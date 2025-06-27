@@ -1,14 +1,49 @@
-<mat-form-field appearance="fill">
-  <textarea matInput [formControl]="itemsControl" rows="5" placeholder="Inserisci gli articoli, uno per riga"></textarea>
-</mat-form-field>
-<button mat-raised-button type="button" (click)="submit()">Invia</button>
-<div *ngIf="loading">Caricamento...</div>
-<div *ngIf="error" class="error">
-  {{ error }}<span *ngIf="errorDetail"> - {{ errorDetail }}</span>
-</div>
-<div *ngIf="response">
-  <h3>Risposta</h3>
-  <pre>{{ response | json }}</pre>
-  <p>Sales Taxes: {{ response.salesTaxes }}</p>
-  <p>Total: {{ response.total }}</p>
+<div class="form-container">
+  <div class="cart-form">
+    <mat-form-field appearance="fill" class="items-field">
+      <textarea
+        matInput
+        [formControl]="itemsControl"
+        rows="5"
+        placeholder="Articoli"
+        readonly
+      ></textarea>
+    </mat-form-field>
+
+    <mat-list>
+      <mat-list-item *ngFor="let item of items; let i = index" class="item-row">
+        <span>{{ item }}</span>
+        <button mat-icon-button color="primary" (click)="startEdit(i)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteItem(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-form-field appearance="fill" class="input-field">
+      <input
+        matInput
+        [formControl]="newItemControl"
+        (keydown.enter)="addItem()"
+        placeholder="Aggiungi articolo"
+      />
+    </mat-form-field>
+
+    <button mat-raised-button type="button" color="primary" (click)="submit()">
+      Invia
+    </button>
+  </div>
+
+  <div *ngIf="loading">Caricamento...</div>
+  <div *ngIf="error" class="error">
+    {{ error }}<span *ngIf="errorDetail"> - {{ errorDetail }}</span>
+  </div>
+  <div *ngIf="response">
+    <h3>Risposta</h3>
+    <pre>{{ response | json }}</pre>
+    <p>Sales Taxes: {{ response.salesTaxes }}</p>
+    <p>Total: {{ response.total }}</p>
+  </div>
 </div>
