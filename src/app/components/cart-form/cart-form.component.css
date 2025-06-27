@@ -1,3 +1,32 @@
 .error {
   color: red;
 }
+
+.cart-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.cart-form {
+  width: 70%;
+  max-width: 800px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.items-list {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.item-actions {
+  margin-left: auto;
+}
+
+.edit-input {
+  width: 100%;
+}

@@ -1,7 +1,43 @@
-<mat-form-field appearance="fill">
-  <textarea matInput [formControl]="itemsControl" rows="5" placeholder="Inserisci gli articoli, uno per riga"></textarea>
-</mat-form-field>
-<button mat-raised-button type="button" (click)="submit()">Invia</button>
+<div class="cart-form-container">
+  <div class="cart-form">
+    <mat-form-field appearance="fill" class="full-width">
+      <input
+        matInput
+        [formControl]="lineControl"
+        (keyup.enter)="addItem()"
+        placeholder="Aggiungi articolo" />
+    </mat-form-field>
+
+    <mat-list class="items-list">
+      <mat-list-item *ngFor="let item of items; let i = index">
+        <ng-container *ngIf="editIndex !== i; else editField">
+          {{ item }}
+        </ng-container>
+        <ng-template #editField>
+          <input
+            matInput
+            class="edit-input"
+            [(ngModel)]="editValue"
+            (keyup.enter)="saveEdit(i)"
+            (blur)="saveEdit(i)" />
+        </ng-template>
+        <span class="item-actions">
+          <button mat-icon-button (click)="startEdit(i)" *ngIf="editIndex !== i">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="saveEdit(i)" *ngIf="editIndex === i">
+            <mat-icon>check</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteItem(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </span>
+      </mat-list-item>
+    </mat-list>
+
+    <button mat-raised-button type="button" (click)="submit()">Invia</button>
+  </div>
+</div>
 <div *ngIf="loading">Caricamento...</div>
 <div *ngIf="error" class="error">
   {{ error }}<span *ngIf="errorDetail"> - {{ errorDetail }}</span>
