@@ -12,14 +12,14 @@ import { BackendConfigService } from '../../services/backend-config.service';
   styleUrl: './toolbar.component.css'
 })
 export class ToolbarComponent {
-  readonly LOCAL_URL = 'https://localhost:44310/GetCartResponse';
+  readonly LOCAL_IIS = 'https://localhost:44310/GetCartResponse';
   readonly AWS_URL = 'https://sales.raphp.net/GetCartResponse';
   currentUrl = this.backendConfig.baseUrl;
 
   constructor(private backendConfig: BackendConfigService) {}
 
   selectBackend(target: 'local' | 'aws'): void {
-    this.currentUrl = target === 'local' ? this.LOCAL_URL : this.AWS_URL;
+    this.currentUrl = target === 'local' ? this.LOCAL_IIS : this.AWS_URL;
     this.backendConfig.setBaseUrl(this.currentUrl);
   }
 }
