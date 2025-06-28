@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class BackendConfigService {
-  private baseUrlSubject = new BehaviorSubject<string>(environment.apiUrl);
+  private baseUrlSubject = new BehaviorSubject<string>(environment.endpoints.aws);
   readonly baseUrl$ = this.baseUrlSubject.asObservable();
 
   get baseUrl(): string {
