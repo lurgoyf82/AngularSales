@@ -1,6 +1,6 @@
 <div class="form-container">
   <div class="cart-form">
-    <mat-form-field appearance="fill" class="items-field">
+    <mat-form-field appearance="fill" class="items-field" hidden>
       <textarea
         matInput
         [formControl]="itemsControl"
@@ -12,13 +12,13 @@
 
     <mat-list>
       <mat-list-item *ngFor="let item of items; let i = index" class="item-row">
-        <span>{{ item }}</span>
         <button mat-icon-button color="primary" (click)="startEdit(i)">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button color="warn" (click)="deleteItem(i)">
           <mat-icon>delete</mat-icon>
         </button>
+        <span>{{ item }}</span>
       </mat-list-item>
     </mat-list>
 
