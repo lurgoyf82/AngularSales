@@ -5,7 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { CartService, CartResponse } from '../../services/cart.service';
+import { CartService } from '../../services/cart.service';
+import { CartResponse } from '../../entities/DTOs/cart/responses/cart-response.dto';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -74,7 +75,7 @@ export class CartFormComponent {
     this.error = undefined;
     this.errorDetail = undefined;
     this.response = undefined;
-    this.cartService.getCartResponse(items).subscribe({
+    this.cartService.getCartResponse({ items }).subscribe({
       next: (res: CartResponse) => {
         this.response = res;
         this.loading = false;
