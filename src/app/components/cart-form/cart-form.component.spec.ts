@@ -4,7 +4,7 @@ import { CartService } from '../../services/cart.service';
 import { throwError } from 'rxjs';
 
 class MockCartService {
-  getCartResponse() {
+  getCartResponse(_req?: unknown) {
     return throwError(() => ({ message: 'bad request', status: 400 }));
   }
 }
