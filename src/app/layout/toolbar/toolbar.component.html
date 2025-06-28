@@ -1,5 +1,15 @@
-<mat-toolbar color="primary" class="toolbar">
-  <span class="spacer"></span>
-  <button mat-button (click)="selectBackend('local')" [disabled]="currentUrl === localUrl">Localhost IIS</button>
-  <button mat-button (click)="selectBackend('aws')" [disabled]="currentUrl === awsUrl">Remote sales.raphp.net</button>
-</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <app-sidenav></app-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="toolbar">
+      <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <button mat-button (click)="selectBackend('local')" [disabled]="currentUrl === localUrl">Localhost IIS</button>
+      <button mat-button (click)="selectBackend('aws')" [disabled]="currentUrl === awsUrl">Remote sales.raphp.net</button>
+    </mat-toolbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>
