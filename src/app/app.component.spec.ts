@@ -22,4 +22,11 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('angular-sales');
   });
 
+  it('should render the sidenav component', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const sidenav = fixture.nativeElement.querySelector('app-sidenav');
+    expect(sidenav).not.toBeNull();
+  });
+
 });

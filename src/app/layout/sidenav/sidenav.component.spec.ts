@@ -20,4 +20,13 @@ describe('SidenavComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should open and close the drawer', () => {
+    component.open();
+    fixture.detectChanges();
+    expect(component.sidenav.opened).toBeTrue();
+    component.close();
+    fixture.detectChanges();
+    expect(component.sidenav.opened).toBeFalse();
+  });
 });
