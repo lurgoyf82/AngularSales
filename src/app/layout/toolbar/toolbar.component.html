@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="toolbar">
   <span class="spacer"></span>
-  <button mat-button (click)="selectBackend('local')" [disabled]="currentUrl === LOCAL_URL">Locale</button>
-  <button mat-button (click)="selectBackend('aws')" [disabled]="currentUrl === AWS_URL">AWS</button>
+  <button mat-button (click)="selectBackend('local')" [disabled]="currentUrl === LOCAL_IIS">Localhost IIS</button>
+  <button mat-button (click)="selectBackend('aws')" [disabled]="currentUrl === AWS_URL">Remote sales.raphp.net</button>
 </mat-toolbar>
