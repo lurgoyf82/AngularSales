@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
 import { BackendConfigService } from '../../services/backend-config.service';
+import { environment } from '../../../environments/environment';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
@@ -15,8 +16,8 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
   styleUrl: './toolbar.component.css'
 })
 export class ToolbarComponent {
-  readonly LOCAL_IIS = 'https://localhost:44310/GetCartResponse';
-  readonly AWS_URL = 'https://sales.raphp.net/GetCartResponse';
+  readonly localUrl = `${environment.endpoints.local}/GetCartResponse`;
+  readonly awsUrl = `${environment.endpoints.aws}/GetCartResponse`;
   currentUrl = this.backendConfig.baseUrl;
 
   @ViewChild(MatSidenav)
@@ -29,7 +30,7 @@ export class ToolbarComponent {
   }
 
   selectBackend(target: 'local' | 'aws'): void {
-    this.currentUrl = target === 'local' ? this.LOCAL_IIS : this.AWS_URL;
+    this.currentUrl = target === 'local' ? this.localUrl : this.awsUrl;
     this.backendConfig.setBaseUrl(this.currentUrl);
   }
 }
