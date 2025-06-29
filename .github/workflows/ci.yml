@@ -1,0 +1,15 @@
+name: angular-build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:                       # ← environment for every step in this job
+      KFILE: ${{ github.workspace }}/AngularSales/node_modules/connect/node_modules/debug/karma.conf.js
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build & (optionally) test
+        run: |
+          chmod +x ci-build.sh
+          ./ci-build.sh        # KFILE is already in the environment
