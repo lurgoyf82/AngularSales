@@ -36,10 +36,10 @@ export class ToolbarComponent {
         break;
       case 'local':
         this.currentUrl = this.localBaseUrl;
-      return;
+        break;
       default:
         this.currentUrl = this.localBaseUrl;
-        return;
+        break;
     }
     this.backendConfig.setBaseUrl(this.currentUrl);
   }
