@@ -18,7 +18,6 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
 export class ToolbarComponent {
   readonly localBaseUrl = environment.endpoints.local;
   readonly awsBaseUrl = environment.endpoints.aws;
-  readonly vmBaseUrl = environment.endpoints.vm;
   currentUrl = this.backendConfig.baseUrl;
 
   @ViewChild(MatSidenav)
@@ -30,13 +29,10 @@ export class ToolbarComponent {
     this.sidenav?.toggle();
   }
 
-  selectBackend(target: 'local' | 'aws' | 'vm'): void {
+  selectBackend(target: 'local' | 'aws'): void {
     switch (target) {
       case 'aws':
         this.currentUrl = this.awsBaseUrl;
-        break;
-      case 'vm':
-        this.currentUrl = this.vmBaseUrl;
         break;
       case 'local':
       default:

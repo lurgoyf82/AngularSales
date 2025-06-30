@@ -3,6 +3,7 @@ export const environment = {
   apiUrl: 'https://sales.raphp.net',
   endpoints: {
     local: 'https://localhost:44310',
-    aws: 'https://sales.raphp.net'
+    aws: 'http://sales-develop.us-east-1.elasticbeanstalk.com',
+    vm: 'https://sales.raphp.net'
   }
 };
