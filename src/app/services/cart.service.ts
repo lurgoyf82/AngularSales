@@ -11,12 +11,12 @@ export class CartService {
   constructor(
     private http: HttpClient,
     private backendConfig: BackendConfigService
-  ) { }
+  ) {}
 
   getCartResponse(request: CartRequest): Observable<CartResponse> {
-    const baseUrl = this.backendConfig.baseUrl;
+    const url = `${this.backendConfig.baseUrl}/GetCartResponse`;
     return this.http
-      .post<CartResponse>(`${baseUrl}/GetCartResponse`, request)
+      .post<CartResponse>(url, request)
       .pipe(
         catchError((error: HttpErrorResponse) =>
           throwError(() => error.error ?? error)
