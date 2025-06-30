@@ -8,8 +8,8 @@
         <mat-icon>menu</mat-icon>
       </button>
       <span class="spacer"></span>
-      <button mat-button (click)="selectBackend('local')" [disabled]="currentUrl === localUrl">Localhost IIS</button>
-      <button mat-button (click)="selectBackend('aws')" [disabled]="currentUrl === awsUrl">Remote sales.raphp.net</button>
+      <button mat-button (click)="selectBackend('local')" [disabled]="currentUrl === localBaseUrl">Localhost IIS</button>
+      <button mat-button (click)="selectBackend('aws')" [disabled]="currentUrl === awsBaseUrl">Remote sales.raphp.net</button>
     </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>

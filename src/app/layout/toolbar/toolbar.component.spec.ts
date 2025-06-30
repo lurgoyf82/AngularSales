@@ -23,20 +23,16 @@ describe('ToolbarComponent', () => {
   });
 
   it('should read endpoint values from environment', () => {
-    expect(component.awsUrl).toBe(
-      `${environment.endpoints.aws}/GetCartResponse`
-    );
-    expect(component.localUrl).toBe(
-      `${environment.endpoints.local}/GetCartResponse`
-    );
+    expect(component.awsBaseUrl).toBe(environment.endpoints.aws);
+    expect(component.localBaseUrl).toBe(environment.endpoints.local);
   });
 
   it('should update base url when selecting backend', () => {
     const service = TestBed.inject(BackendConfigService);
     spyOn(service, 'setBaseUrl').and.callThrough();
     component.selectBackend('local');
-    expect(service.setBaseUrl).toHaveBeenCalledWith(component.localUrl);
-    expect(component.currentUrl).toBe(component.localUrl);
+    expect(service.setBaseUrl).toHaveBeenCalledWith(component.localBaseUrl);
+    expect(component.currentUrl).toBe(component.localBaseUrl);
   });
 
   it('should display menu button', () => {
@@ -47,7 +43,7 @@ describe('ToolbarComponent', () => {
   });
 
   it('should disable buttons based on current url', () => {
-    component.currentUrl = component.localUrl;
+    component.currentUrl = component.localBaseUrl;
     fixture.detectChanges();
     const buttons: HTMLButtonElement[] =
       fixture.nativeElement.querySelectorAll('button[mat-button]');
@@ -56,7 +52,7 @@ describe('ToolbarComponent', () => {
     expect(localBtn.disabled).toBeTrue();
     expect(awsBtn.disabled).toBeFalse();
 
-    component.currentUrl = component.awsUrl;
+    component.currentUrl = component.awsBaseUrl;
     fixture.detectChanges();
     expect(localBtn.disabled).toBeFalse();
     expect(awsBtn.disabled).toBeTrue();
