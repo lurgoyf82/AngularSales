@@ -38,7 +38,7 @@ export class ToolbarComponent {
         this.currentUrl = this.localBaseUrl;
         break;
       default:
-        this.currentUrl = this.localBaseUrl;
+        this.currentUrl = this.awsBaseUrl;
         break;
     }
     this.backendConfig.setBaseUrl(this.currentUrl);
