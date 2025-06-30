@@ -16,21 +16,33 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
   styleUrl: './toolbar.component.css'
 })
 export class ToolbarComponent {
-  readonly localUrl = `${environment.endpoints.local}/GetCartResponse`;
-  readonly awsUrl = `${environment.endpoints.aws}/GetCartResponse`;
+  readonly localBaseUrl = environment.endpoints.local;
+  readonly awsBaseUrl = environment.endpoints.aws;
+  readonly vmBaseUrl = environment.endpoints.vm;
   currentUrl = this.backendConfig.baseUrl;
 
   @ViewChild(MatSidenav)
   sidenav?: MatSidenav;
 
-  constructor(private backendConfig: BackendConfigService) {}
+  constructor(private backendConfig: BackendConfigService) { }
 
   toggleSidenav(): void {
     this.sidenav?.toggle();
   }
 
-  selectBackend(target: 'local' | 'aws'): void {
-    this.currentUrl = target === 'local' ? this.localUrl : this.awsUrl;
+  selectBackend(target: 'local' | 'aws' | 'vm'): void {
+    switch (target) {
+      case 'aws':
+        this.currentUrl = this.awsBaseUrl;
+        break;
+      case 'vm':
+        this.currentUrl = this.vmBaseUrl;
+        break;
+      case 'local':
+      default:
+        this.currentUrl = this.localBaseUrl;
+        return;
+    }
     this.backendConfig.setBaseUrl(this.currentUrl);
   }
 }
